@@ -1,41 +1,56 @@
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Library {
-    private Set<Book> books;
+    private Map<String, Book> books;
     private int numberOfYears;
     public Library(int numberOfYears) {
-        books = new HashSet<>();
+        books = new HashMap<>();
         this.numberOfYears = numberOfYears;
     }
     public Library() {
-        books = new HashSet<>();
+        books = new HashMap<>();
         this.numberOfYears = 5; // Default to 5 years if not specified
     }
-    public Library(Set<Book> books) {
-        this.books = new HashSet<>();
+    public Library(Map<String, Book> books) {
+        this.books = new HashMap<>();
     }
 
     public void addBook(Book book)
     {
         if (book != null) {
-            books.add(book);
+            books.put(book.getISBN(), book);
         }
     }
     public void cleanOutDatedBooks()
     {
         int currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
-        books.removeIf(book -> book.getPublicationYear() < currentYear - numberOfYears);
+        books.values().removeIf(book -> (currentYear - book.getPublicationYear()) > numberOfYears);
     }
-    public Set<Book> getBooks() {
+    public Map<String, Book> getBooks() {
         return books;
     }
     public int getNumberOfYears() {
         return numberOfYears;
     }
+    public void sellBook(String ISBN, int quantity, String email, String address)
+    {
+
+
+    }
+
     public void displayBooks() {
-        for (Book book : books) {
-            System.out.println("ISBN: " + book.getISBN() + ", Author: " + book.getAuthor() + ", Title: " + book.getTitle() + ", Year: " + book.getPublicationYear() + (book instanceof PaperBook ? " price " + ((PaperBook) book).getPrice() + ", quantity " + ((PaperBook) book).getQuantity() : "") + (book instanceof Ebook ? " price " + ((Ebook) book).getPrice() : "") + (book instanceof DemoBook ? " (Demo Book)" : ""));
+        if (books.isEmpty()) {
+            System.out.println("No books available in the library.");
+        } else {
+            System.out.println("Books in the library:");
+            for (Book book : books.values()) {
+                System.out.println(book.getTitle() + " by " + book.getAuthor() + 
+                                   " (ISBN: " + book.getISBN() +
+                                   ", Year: " + book.getPublicationYear() +
+                                   ", Price: $" + book.getPrice() + ")");
+                
+            }
         }
     }
 }

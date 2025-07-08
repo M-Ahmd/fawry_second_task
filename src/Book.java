@@ -21,4 +21,5 @@ public abstract class Book {
     public String getAuthor() {
         return author;
     }
+    public abstract double getPrice();
 }
