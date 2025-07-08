@@ -1,6 +1,14 @@
 public class QuantumBookstoreFullTest {
     public static void main(String[] args) throws Exception {
         Book book = new PaperBook("1234567890", "Quantum Physics", 2023, 29.99, 100);
-        System.out.println("Book ISBN: " + book.getISBN());
+        Book ebook = new Ebook("0987654321", "Quantum Mechanics", 2022, 19.99);
+        Book demoBook = new DemoBook("1122334455", "Quantum Computing", 2019);
+        Library library = new Library();
+        library.addBook(book);
+        library.addBook(ebook);
+        library.addBook(demoBook);
+        library.cleanOutDatedBooks();
+        library.displayBooks();
+
     }
 }
