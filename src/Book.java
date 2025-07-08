@@ -4,9 +4,9 @@ public abstract class Book {
     private int publicationYear;
     private String author;
     public Book(String author, String ISBN, String title, int publicationYear) {
+        this.title = title;
         this.author = author;
         this.ISBN = ISBN;
-        this.title = title;
         this.publicationYear = publicationYear;
     }
     public String getISBN() {
@@ -24,11 +24,12 @@ public abstract class Book {
     public abstract double getPrice();
     public void printBookDetails()
     {
-        System.out.println("Book Details:");
-        System.out.println("Title: " + getTitle());
-        System.out.println("Author: " + getAuthor());
-        System.out.println("ISBN: " + getISBN());
-        System.out.println("Publication Year: " + getPublicationYear());
-        System.out.println("Price: $" + getPrice());
+        QuantumPrint.println("Book Details:");
+        QuantumPrint.println("Title: " + getTitle());
+        QuantumPrint.println("Author: " + getAuthor());
+        QuantumPrint.println("ISBN: " + getISBN());
+        QuantumPrint.println("Publication Year: " + getPublicationYear());
+        QuantumPrint.println("Price: $" + getPrice());
     }
+    public abstract double sell(int quantity, String email, String address);
 }

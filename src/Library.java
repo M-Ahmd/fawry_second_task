@@ -2,109 +2,127 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Library {
-    private Map<String, Book> books;
-    private int numberOfYears;
+    private Map<String, Book> books;// Map to store books with ISBN as key
+    private int numberOfYears;// Number of years to consider a book outdated
+    
+    /**
+     * Constructor to initialize the library with a specific number of years.
+     * @param numberOfYears The number of years to consider a book outdated.
+     * * This constructor initializes the books map and sets the number of years.
+     * If the number of years is not specified, it defaults to 5 years.
+     */
     public Library(int numberOfYears) {
         books = new HashMap<>();
         this.numberOfYears = numberOfYears;
     }
+    /**
+     * Default constructor that initializes the library with a default number of years.
+     * This constructor initializes the books map and sets the number of years to 5.
+     */
     public Library() {
         books = new HashMap<>();
         this.numberOfYears = 5; // Default to 5 years if not specified
     }
+    /**
+     * Constructor to initialize the library with a map of books.
+     * @param books A map of books to initialize the library with.
+     * This constructor initializes the books map with the provided books.
+     */
     public Library(Map<String, Book> books) {
-        this.books = new HashMap<>();
+        this.books = new HashMap<>(books);
     }
 
+    /**
+     * Adds a book to the library.
+     * @param book The book to be added.
+     * This method adds a book to the library's collection if it is not null.
+     */
     public void addBook(Book book)
     {
         if (book != null) {
             books.put(book.getISBN(), book);
         }
     }
+
+    /**
+     * Removes a book from the library by its ISBN.
+     * @param ISBN The ISBN of the book to be removed.
+     * This method removes a book from the library's collection if it exists.
+     */
     public void cleanOutDatedBooks()
     {
         int currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
         books.values().removeIf(book -> (currentYear - book.getPublicationYear()) > numberOfYears);
     }
+
+    /**
+     * Gets the collection of books in the library.
+     * @return A map of books where the key is the ISBN and the value is the Book object.
+     * This method returns the current collection of books in the library.
+     */
     public Map<String, Book> getBooks() {
         return books;
     }
+    
     public int getNumberOfYears() {
         return numberOfYears;
     }
-    private boolean decreaseTheStock(Book book, int quantity) {
-        PaperBook paper = (PaperBook) book;
-        if (paper.getQuantity() >= quantity) {
-            paper.setQuantity(paper.getQuantity() - quantity);
-            return true;
-        } else {
-            System.out.println("Error: Not enough stock to decrease.");
-            return false;
-        }
-    }
-
-    private void printBookDetails(Book book, int quantity) {
-        System.out.println("Order confirmed!");
-        System.out.println("-----------------------------");
-        System.out.println("Book: " + book.getTitle());
-        System.out.println("Author: " + book.getAuthor());
-        System.out.println("ISBN: " + book.getISBN());
-        System.out.println("Quantity: " + quantity);
-        System.out.println("Total Price: $" + (book.getPrice() * quantity));
-        System.out.println("-----------------------------");
-    }
-    private void printBookDetails(Book book) {
-        System.out.println("Order confirmed!");
-        System.out.println("-----------------------------");
-        System.out.println("DemoBook: " + book.getTitle());
-        System.out.println("Author: " + book.getAuthor());
-        System.out.println("ISBN: " + book.getISBN());
-        System.out.println("-----------------------------");
-    }
-
-    public void sellBook(String ISBN, int quantity, String email, String address) {
+    
+    /**
+     * Sells a book from the library.
+     * @param ISBN The ISBN of the book to be sold.
+     * @param quantity The quantity of the book to be sold.
+     * @param email The email address for sending confirmation.
+     * @param address The address for shipping the book (if applicable).
+     * This method processes the sale of a book, handling different types of books (paper, ebook, demo).
+     */
+    public double sellBook(String ISBN, int quantity, String email, String address) {
         Book book = books.get(ISBN);
-
         if (book == null) {
-            System.out.println("Error: This book does not exist.");
-        } else if (quantity <= 0) {
-            System.out.println("Error: Please enter a valid quantity.");
-        } else if (book instanceof PaperBook) {
-            if (decreaseTheStock(book, quantity)) {
-                printBookDetails(book, quantity);
-                ShippingService.shipping(address);
-            } else {
-                System.out.println("The requested quantity exceeds available stock.");
-            }
-        } else if (book instanceof Ebook) {
-            printBookDetails(book, quantity);
-            MailService.sendMail(email);
-        } 
-        else if (book instanceof DemoBook) {
-            printBookDetails(book);
-            System.out.println("This is a demo book. No shipping or payment required.");
-            MailService.sendMail(email); // or just show: "link sent to email"
+            QuantumPrint.println("Book not found.");
+            return 0.0;
         }
-        else {
-            System.out.println("Error: Unsupported book type.");
-        }
+        double totalPrice = book.sell(quantity, email, address);
+        QuantumPrint.println("Total paid: $" + totalPrice);
+        System.out.println("---------------------------------------------------");
+        return totalPrice;
     }
 
+    private boolean shouldSkip(Book book) {
+        return book instanceof PaperBook paperBook && paperBook.getQuantity() == 0;
+    }
+
+
+    private String formatBookDetails(Book book) {
+        StringBuilder details = new StringBuilder();
+        details.append("Title: ").append(book.getTitle())
+            .append(", Author: ").append(book.getAuthor())
+            .append(", ISBN: ").append(book.getISBN())
+            .append(", Year: ").append(book.getPublicationYear());
+
+        double price = book.getPrice();
+        if (price > 0) {
+            details.append(", Price: $").append(price);
+        }
+
+        return details.toString();
+    }
+    /**
+     * Displays all books in the library.
+     * This method prints the details of all books in the library, excluding paper books with no stock.
+     */
     public void displayBooks() {
         if (books.isEmpty()) {
-            System.out.println("No books available in the library.");
-        } else {
-            System.out.println("Books in the library:");
-            for (Book book : books.values()) {
-                if(book instanceof PaperBook && ((PaperBook) book).getQuantity() == 0)
-                    continue; // Skip demo books with quantity 0
-                System.out.println(book.getTitle() + " by " + book.getAuthor() +
-                   " (ISBN: " + book.getISBN() +
-                   ", Year: " + book.getPublicationYear() +
-                   (book.getPrice() != 0 ? ", Price: $" + book.getPrice() : "") +
-                   ")");
-            }
+            QuantumPrint.println("No books available in the library.");
+            return;
         }
+
+        QuantumPrint.println("Books in the library:");
+        for (Book book : books.values()) {
+            if (shouldSkip(book)) continue;
+
+            QuantumPrint.println(formatBookDetails(book));
+        }
+        System.out.println("---------------------------------------------------");
     }
 }
