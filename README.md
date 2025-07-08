@@ -41,9 +41,9 @@ All console output is prefixed with `Quantum Bookstore:` to clearly identify sys
 ## 🧪 Sample Output
 
 Books in the library:
-Title: Quantum Physics, Author: Basel Ebaid, ISBN: 1234567890, Year: 2023, Price: $29.99
-Title: Quantum Mechanics, Author: Mohammed Saad, ISBN: 0987654321, Year: 2022, Price: $19.99
-Title: Quantum Computing, Author: Karim Adel, ISBN: 1122334455, Year: 2023
+Title: Quantum Physics, ISBN: 1234567890, Year: 2023, Price: $29.99
+Title: Quantum Mechanics, ISBN: 0987654321, Year: 2022, Price: $19.99
+Title: Quantum Computing, ISBN: 1122334455, Year: 2023
 ...
 Total paid: $2999.0
 Shipped to: 123 Main St
