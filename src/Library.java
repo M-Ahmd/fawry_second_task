@@ -35,7 +35,7 @@ public class Library {
     }
     public void displayBooks() {
         for (Book book : books) {
-            System.out.println("ISBN: " + book.getISBN() + ", Title: " + book.getTitle() + ", Year: " + book.getPublicationYear() + (book instanceof PaperBook ? " price " + ((PaperBook) book).getPrice() + ", quantity " + ((PaperBook) book).getQuantity() : "") + (book instanceof Ebook ? " price " + ((Ebook) book).getPrice() : "") + (book instanceof DemoBook ? " (Demo Book)" : ""));
+            System.out.println("ISBN: " + book.getISBN() + ", Author: " + book.getAuthor() + ", Title: " + book.getTitle() + ", Year: " + book.getPublicationYear() + (book instanceof PaperBook ? " price " + ((PaperBook) book).getPrice() + ", quantity " + ((PaperBook) book).getQuantity() : "") + (book instanceof Ebook ? " price " + ((Ebook) book).getPrice() : "") + (book instanceof DemoBook ? " (Demo Book)" : ""));
         }
     }
 }
