@@ -78,11 +78,11 @@ public class Library {
     public double sellBook(String ISBN, int quantity, String email, String address) {
         Book book = books.get(ISBN);
         if (book == null) {
-            QuantumPrint.println("Book not found.");
+            System.out.println("Book not found.");
             return 0.0;
         }
         double totalPrice = book.sell(quantity, email, address);
-        QuantumPrint.println("Total paid: $" + totalPrice);
+        System.out.println("Total paid: $" + totalPrice);
         System.out.println("---------------------------------------------------");
         return totalPrice;
     }
@@ -122,15 +122,15 @@ public class Library {
      */
     public void displayBooks() {
         if (books.isEmpty()) {
-            QuantumPrint.println("No books available in the library.");
+            System.out.println("No books available in the library.");
             return;
         }
 
-        QuantumPrint.println("Books in the library:");
+        System.out.println("Books in the library:");
         for (Book book : books.values()) {
             if (shouldSkip(book)) continue;
 
-            QuantumPrint.println(formatBookDetails(book));
+            System.out.println(formatBookDetails(book));
         }
         System.out.println("---------------------------------------------------");
     }

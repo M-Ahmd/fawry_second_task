@@ -24,12 +24,12 @@ public abstract class Book {
     public abstract double getPrice();
     public void printBookDetails()
     {
-        QuantumPrint.println("Book Details:");
-        QuantumPrint.println("Title: " + getTitle());
-        QuantumPrint.println("Author: " + getAuthor());
-        QuantumPrint.println("ISBN: " + getISBN());
-        QuantumPrint.println("Publication Year: " + getPublicationYear());
-        QuantumPrint.println("Price: $" + getPrice());
+        System.out.println("Book Details:");
+        System.out.println("Title: " + getTitle());
+        System.out.println("Author: " + getAuthor());
+        System.out.println("ISBN: " + getISBN());
+        System.out.println("Publication Year: " + getPublicationYear());
+        System.out.println("Price: $" + getPrice());
     }
     public abstract double sell(int quantity, String email, String address);
 }

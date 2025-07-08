@@ -21,7 +21,7 @@ public class DemoBook extends Book{
     @Override
     public double sell(int quantity, String email, String address) {
         printBookDetails();
-        QuantumPrint.println("This is a demo copy. Free download sent to: " + email);
+        System.out.println("This is a demo copy. Free download sent to: " + email);
         MailService.sendMail(email);
         return 0.0;
     }

@@ -28,8 +28,8 @@ public class Ebook extends Book{
     
     public void printBookDetails() {
         super.printBookDetails();
-        QuantumPrint.println("File Type: " + fileType);
-        QuantumPrint.println("Will be delivered via email.");
+        System.out.println("File Type: " + fileType);
+        System.out.println("Will be delivered via email.");
     }
     /**
      * Sells a specified quantity of the ebook.
@@ -42,13 +42,13 @@ public class Ebook extends Book{
     @Override
     public double sell(int quantity, String email, String address) {
         if (quantity <= 0) {
-            QuantumPrint.println("Invalid quantity.");
+            System.out.println("Invalid quantity.");
             return 0.0;
         }
 
         double total = getPrice() * quantity;
         printBookDetails();
-        QuantumPrint.println("Sent to email: " + email);
+        System.out.println("Sent to email: " + email);
         MailService.sendMail(email);
         return total;
     }

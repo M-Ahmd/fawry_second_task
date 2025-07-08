@@ -18,7 +18,7 @@ public class PaperBook extends Book{
     }
     private void printBookDetails(int quantity) {
         super.printBookDetails();
-        QuantumPrint.println("Quantity: " + quantity);
+        System.out.println("Quantity: " + quantity);
     }
     /**
      * Sells a specified quantity of the book.
@@ -31,18 +31,18 @@ public class PaperBook extends Book{
     @Override
     public double sell(int quantity, String email, String address) {
         if (quantity <= 0) {
-            QuantumPrint.println("Invalid quantity.");
+            System.out.println("Invalid quantity.");
             return 0.0;
         }
         if (quantity > this.quantity) {
-            QuantumPrint.println("Not enough stock.");
+            System.out.println("Not enough stock.");
             return 0.0;
         }
 
         this.quantity -= quantity;
         double total = getPrice() * quantity;
         printBookDetails(quantity);
-        QuantumPrint.println("Shipped to: " + address);
+        System.out.println("Shipped to: " + address);
         ShippingService.shipping(address);
         return total;
     }
