@@ -5,7 +5,6 @@ public class Ebook extends Book{
     
     /**
      * Constructs an Ebook with the specified details.
-     * @param author The author of the ebook.
      * @param ISBN The ISBN of the ebook.
      * @param title The title of the ebook.
      * @param publicationYear The year the ebook was published.

@@ -100,7 +100,7 @@ public class Library {
      * Formats the details of a book for display.
      * @param book The book to format.
      * @return A string containing the formatted details of the book.
-     * This method creates a string representation of a book's details, including title, author, ISBN, year, and price.
+     * This method creates a string representation of a book's details, including title, ISBN, year, and price.
      */
     private String formatBookDetails(Book book) {
         StringBuilder details = new StringBuilder();
