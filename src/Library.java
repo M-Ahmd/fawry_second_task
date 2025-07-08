@@ -45,9 +45,8 @@ public class Library {
     }
 
     /**
-     * Removes a book from the library by its ISBN.
-     * @param ISBN The ISBN of the book to be removed.
-     * This method removes a book from the library's collection if it exists.
+     * cleans out outdated books from the library.
+     * This method removes books that are older than the specified number of years.
      */
     public void cleanOutDatedBooks()
     {
@@ -87,12 +86,22 @@ public class Library {
         System.out.println("---------------------------------------------------");
         return totalPrice;
     }
-
+    /**
+     * Checks if a book should be skipped based on its type and quantity.
+     * @param book The book to check.
+     * @return true if the book is a PaperBook with zero quantity, false otherwise.
+     * This method determines if a book should be skipped when displaying the library's collection.
+     */
     private boolean shouldSkip(Book book) {
         return book instanceof PaperBook paperBook && paperBook.getQuantity() == 0;
     }
 
-
+    /**
+     * Formats the details of a book for display.
+     * @param book The book to format.
+     * @return A string containing the formatted details of the book.
+     * This method creates a string representation of a book's details, including title, author, ISBN, year, and price.
+     */
     private String formatBookDetails(Book book) {
         StringBuilder details = new StringBuilder();
         details.append("Title: ").append(book.getTitle())

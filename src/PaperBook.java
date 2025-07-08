@@ -20,6 +20,14 @@ public class PaperBook extends Book{
         super.printBookDetails();
         QuantumPrint.println("Quantity: " + quantity);
     }
+    /**
+     * Sells a specified quantity of the book.
+     * @param quantity The number of copies to sell.
+     * @param email The email address to send the book details.
+     * @param address The address to ship the book.
+     * @return The total price for the sold quantity.
+     * This method checks if the requested quantity is valid and available in stock.
+     */
     @Override
     public double sell(int quantity, String email, String address) {
         if (quantity <= 0) {

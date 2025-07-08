@@ -1,6 +1,17 @@
 public class Ebook extends Book{
     private double price;
     private String fileType;
+    
+    
+    /**
+     * Constructs an Ebook with the specified details.
+     * @param author The author of the ebook.
+     * @param ISBN The ISBN of the ebook.
+     * @param title The title of the ebook.
+     * @param publicationYear The year the ebook was published.
+     * @param price The price of the ebook.
+     * @param fileType The type of file (e.g., PDF, EPUB).
+     */
     public Ebook(String author, String ISBN, String title, int publicationYear, double price, String fileType) {
         super(author, ISBN, title, publicationYear);
         this.price = price;
@@ -20,6 +31,14 @@ public class Ebook extends Book{
         QuantumPrint.println("File Type: " + fileType);
         QuantumPrint.println("Will be delivered via email.");
     }
+    /**
+     * Sells a specified quantity of the ebook.
+     * @param quantity The number of copies to sell.
+     * @param email The email address to send the ebook details.
+     * @param address The address to ship the ebook (not applicable for ebooks).
+     * @return The total price for the sold quantity.
+     * This method checks if the requested quantity is valid and processes the sale by sending an email
+     */
     @Override
     public double sell(int quantity, String email, String address) {
         if (quantity <= 0) {
