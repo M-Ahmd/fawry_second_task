@@ -104,8 +104,7 @@ public class Library {
      */
     private String formatBookDetails(Book book) {
         StringBuilder details = new StringBuilder();
-        details.append("Title: ").append(book.getTitle())
-            .append(", Author: ").append(book.getAuthor())
+        details.append("Title: ").append(book.getTitle()).append(", Author: ")
             .append(", ISBN: ").append(book.getISBN())
             .append(", Year: ").append(book.getPublicationYear());
 

@@ -1,7 +1,7 @@
 public class DemoBook extends Book{
 
-    public DemoBook(String author, String ISBN, String title, int publicationYear) {
-        super(author, ISBN, title, publicationYear);
+    public DemoBook(String ISBN, String title, int publicationYear) {
+        super(ISBN, title, publicationYear);
     }
     @Override
     public double getPrice() {

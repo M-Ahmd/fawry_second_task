@@ -12,8 +12,8 @@ public class Ebook extends Book{
      * @param price The price of the ebook.
      * @param fileType The type of file (e.g., PDF, EPUB).
      */
-    public Ebook(String author, String ISBN, String title, int publicationYear, double price, String fileType) {
-        super(author, ISBN, title, publicationYear);
+    public Ebook(String ISBN, String title, int publicationYear, double price, String fileType) {
+        super(ISBN, title, publicationYear);
         this.price = price;
         this.fileType = fileType;
     }
