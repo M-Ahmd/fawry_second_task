@@ -32,7 +32,6 @@ All console output is prefixed with `Quantum Bookstore:` to clearly identify sys
 | `Ebook`          | Represents digital books with a file type and email delivery                    |
 | `DemoBook`       | Represents free books not for sale, sent as demos                               |
 | `Library`        | Manages book inventory, cleaning outdated books, and processing sales           |
-| `QuantumPrint`   | Wrapper for printing all messages with a prefix `Quantum Bookstore:`            |
 | `MailService`    | Stub for sending emails                                                         |
 | `ShippingService`| Stub for handling shipping                                                       |
 | `QuantumBookstoreFullTest` | Main class used to demonstrate and test the system                     |
@@ -41,13 +40,13 @@ All console output is prefixed with `Quantum Bookstore:` to clearly identify sys
 
 ## 🧪 Sample Output
 
-Quantum Bookstore: Books in the library:
-Quantum Bookstore: Title: Quantum Physics, Author: Basel Ebaid, ISBN: 1234567890, Year: 2023, Price: $29.99
-Quantum Bookstore: Title: Quantum Mechanics, Author: Mohammed Saad, ISBN: 0987654321, Year: 2022, Price: $19.99
-Quantum Bookstore: Title: Quantum Computing, Author: Karim Adel, ISBN: 1122334455, Year: 2023
+Books in the library:
+Title: Quantum Physics, Author: Basel Ebaid, ISBN: 1234567890, Year: 2023, Price: $29.99
+Title: Quantum Mechanics, Author: Mohammed Saad, ISBN: 0987654321, Year: 2022, Price: $19.99
+Title: Quantum Computing, Author: Karim Adel, ISBN: 1122334455, Year: 2023
 ...
-Quantum Bookstore: Total paid: $2999.0
-Quantum Bookstore: Shipped to: 123 Main St
+Total paid: $2999.0
+Shipped to: 123 Main St
 ...
 
 
