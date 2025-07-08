@@ -1,7 +1,7 @@
 public abstract class Book {
-    String ISBN;
-    String title;
-    int publicationYear;
+    private String ISBN;
+    private String title;
+    private int publicationYear;
 
     public Book(String ISBN, String title, int publicationYear) {
         this.ISBN = ISBN;
