@@ -1,49 +1,30 @@
-public class PaperBook extends Book{
+public class PaperBook extends Book {
     private double price;
     private int quantity;
+    private ShippingDeliverable delivery;
 
-    public PaperBook(String ISBN, String title, int publicationYear, double price, int quantity) {
-        super(ISBN, title, publicationYear);
+    public PaperBook(String ISBN, String title, int year, double price, int quantity) {
+        super(ISBN, title, year);
         this.price = price;
         this.quantity = quantity;
+        this.delivery = new ShippingDeliveryStrategy();
     }
-    public double getPrice() {
-        return price;
-    }
-    public int getQuantity() {
-        return quantity;
-    }
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-    private void printBookDetails(int quantity) {
-        super.printBookDetails();
-        System.out.println("Quantity: " + quantity);
-    }
-    /**
-     * Sells a specified quantity of the book.
-     * @param quantity The number of copies to sell.
-     * @param email The email address to send the book details.
-     * @param address The address to ship the book.
-     * @return The total price for the sold quantity.
-     * This method checks if the requested quantity is valid and available in stock.
-     */
+
+    @Override
+    public double getPrice() { return price; }
+    public int getQuantity() { return quantity; }
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+
     @Override
     public double sell(int quantity, String email, String address) {
-        if (quantity <= 0) {
-            System.out.println("Invalid quantity.");
+        if (quantity <= 0 || quantity > this.quantity) {
+            System.out.println("Invalid quantity or not enough stock.");
             return 0.0;
         }
-        if (quantity > this.quantity) {
-            System.out.println("Not enough stock.");
-            return 0.0;
-        }
-
         this.quantity -= quantity;
-        double total = getPrice() * quantity;
-        printBookDetails(quantity);
-        System.out.println("Shipped to: " + address);
-        ShippingService.shipping(address);
+        double total = price * quantity;
+        printBookDetails();
+        delivery.deliverToAddress(address);
         return total;
     }
 }
